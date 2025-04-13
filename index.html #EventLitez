@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventLitez - Discover Local Events</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>EventLitez</h1>
+            <p>Discover and create local events</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#events">View Events</a></li>
+                <li><a href="#create">Create Event</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="events" class="events-section">
+            <h2>Upcoming Events</h2>
+            <div class="events-list" id="eventsList">
+                
+            </div>
+        </section>
+
+        <section id="create" class="create-section">
+            <h2>Create New Event</h2>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventName">Event Name:</label>
+                    <input type="text" id="eventName" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Date:</label>
+                    <input type="date" id="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventTime">Time:</label>
+                    <input type="time" id="eventTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventLocation">Location:</label>
+                    <input type="text" id="eventLocation" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Description:</label>
+                    <textarea id="eventDescription" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn">Create Event</button>
+            </form>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>About EventLitez</h2>
+            <p>EventLitez is a platform for discovering and creating local events. Whether you're organizing a community gathering, a workshop, or a social meetup, EventLitez makes it easy to share your event with others.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EventLitez. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
