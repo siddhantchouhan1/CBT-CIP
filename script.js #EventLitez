@@ -1,0 +1,95 @@
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    let events = [];
+    
+
+    const eventForm = document.getElementById('eventForm');
+    const eventsList = document.getElementById('eventsList');
+    
+    
+    if (localStorage.getItem('events')) {
+        events = JSON.parse(localStorage.getItem('events'));
+        displayEvents();
+    }
+    
+    
+    eventForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('eventName').value;
+        const date = document.getElementById('eventDate').value;
+        const time = document.getElementById('eventTime').value;
+        const location = document.getElementById('eventLocation').value;
+        const description = document.getElementById('eventDescription').value;
+        
+        
+        const newEvent = {
+            id: Date.now(),
+            name: name,
+            date: date,
+            time: time,
+            location: location,
+            description: description
+        };
+        
+       
+        events.push(newEvent);
+        
+        
+        localStorage.setItem('events', JSON.stringify(events));
+        
+        
+        displayEvents();
+        
+     
+        eventForm.reset();
+        
+        
+        document.getElementById('events').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    
+    function displayEvents() {
+        
+        eventsList.innerHTML = '';
+        
+       
+        events.sort(function(a, b) {
+            return new Date(a.date) - new Date(b.date);
+        });
+        
+        
+        events.forEach(function(event) {
+            const eventCard = document.createElement('div');
+            eventCard.className = 'event-card';
+            
+        
+            const formattedDate = new Date(event.date).toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            eventCard.innerHTML = `
+                <h3>${event.name}</h3>
+                <p class="event-date">${formattedDate} at ${event.time}</p>
+                <p><strong>Location:</strong> ${event.location}</p>
+                ${event.description ? `<p>${event.description}</p>` : ''}
+                <button onclick="deleteEvent(${event.id})" class="btn" style="margin-top: 10px; background-color: #e74c3c;">Delete</button>
+            `;
+            
+            eventsList.appendChild(eventCard);
+        });
+    }
+    events
+    
+    window.deleteEvent = function(id) {
+        events = events.filter(function(event) {
+            return event.id !== id;
+        });
+        localStorage.setItem('events', JSON.stringify(events));
+        displayEvents();
+    };
+});
